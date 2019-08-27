@@ -1,6 +1,5 @@
 #!/bin/bash
 
-export t_file
 ##  Loads the file path to a variable
 echo -e "\n\n\n Select your Rednit matches file\n\n\n"
 read t_file
@@ -15,14 +14,15 @@ awk '/"_id": "/ {print $2}' $t_file | tr ',' ' ' | tr -d '"'> /tmp/id.rednit
 id_num=$(cat /tmp/id.rednit | wc -l)
 
 ##  Check for the existance of this file
-isso_n_ecxisti=$(cat /tmp/URL.dirt 2> /dev/null; echo $?)
+isso_n_ecxisti=$(ls /tmp/URL.dirt 2>&1 > /dev/null; echo $?)
 
-if [ $isso_n_ecxisti -eq 0]
-then
-  echo "No dirt found\n"
-else
-  echo "Cleaning out the dirt...\n"
+echo "$isso_n_ecxisti"
+
+if [ $isso_n_ecxisti -eq 0 ]; then
+  echo -e "Cleaning out the dirt...\n"
   rm /tmp/URL.dirt
+else
+  echo -e "No dirt found\n"
 fi
 
 ## Counting var 4 the loop
