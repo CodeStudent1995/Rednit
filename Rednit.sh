@@ -14,7 +14,7 @@ awk '/"_id": "/ {print $2}' $t_file | tr ',' ' ' | tr -d '"'> /tmp/id.rednit
 id_num=$(cat /tmp/id.rednit | wc -l)
 
 ##  Check for the existance of this file
-isso_n_ecxisti=$(ls /tmp/URL.dirt 2>&1 > /dev/null; echo $?)
+isso_n_ecxisti=$(ls /tmp/URL.dirt &> /dev/null; echo $?)
 
 echo "$isso_n_ecxisti"
 
@@ -27,6 +27,9 @@ fi
 
 ## Counting var 4 the loop
 i=1
+
+## Creates the empty file
+touch /tmp/URL.dirt
 
 ## Do a loop to get every ID
 while [ $i -le $id_num ]
